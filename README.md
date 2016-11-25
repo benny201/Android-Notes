@@ -2,7 +2,8 @@
 
 > 第一行代码的笔记
 
-Chapter 5 Broadcast
+Chapter 5 Broadcast 
+> update:2016/11/24
 
 **create a dynamic broadcastreceiver**
 

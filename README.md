@@ -13,6 +13,6 @@ Chapter 5 Broadcast
 2.connectivity－change with connection state
 * modify codes in onReceive();
 * create ConnectivityManager and call **Context.getSystemService()** to get service state
-<?php
+<?android
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ?>

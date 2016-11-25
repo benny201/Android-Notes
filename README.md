@@ -27,7 +27,7 @@ public void onReceive(Context context, Intent intent) {
         
     }
 ```
-** add uses-permission **
+* ** add uses-permission **
 ``` 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```

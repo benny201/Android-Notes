@@ -5,6 +5,8 @@
 ## Broadcastreceiver
 > update:2016/11/24
 
+
+
 ### create a dynamic broadcastreceiver
 
 #### 1.how to receive a Connectivity-change
@@ -42,7 +44,10 @@ public void onReceive(Context context, Intent intent) {
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
+
+
 ### create a static broadcastreceiver
+
 why call it static: it can receive a broadcast when the app don't run
 * create a new class for broadcast 
 e.g.

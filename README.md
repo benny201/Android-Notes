@@ -1,20 +1,20 @@
-### Android-Notes
+# Android-Notes
 
 > 第一行代码的笔记
 
-Chapter 5 Broadcast 
+## Broadcastreceiver
 > update:2016/11/24
 
-**create a dynamic broadcastreceiver**
+### create a dynamic broadcastreceiver
 
-**1.how to receive a Connectivity-change**
+#### 1.how to receive a Connectivity-change
 * create Intentfilter -> addAction(CONNECTIVITY-CHange)
 * create Networkchange class extends BroadReceiver 
 * registerReceiver
 * call unregisterReceiver in onDestory()
 
 
-**2.connectivity－change with connection state**
+#### 2.connectivity－change with connection state
 * modify codes in onReceive();
 * create ConnectivityManager and call **Context.getSystemService()** to get service state
 ```
@@ -42,8 +42,29 @@ public void onReceive(Context context, Intent intent) {
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
-**create a static broadcastreceiver**
+### create a static broadcastreceiver
 why call it static: it can receive a broadcast when the app don't run
+* create a new class for broadcast 
+e.g.
+
+```
+public class BootCompletedReceiver extends BroadcastReceiver{
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context,"bootcompleted",Toast.LENGTH_LONG).show();
+    }
+}
+```
+   **不要在oncreate中处理太多逻辑**
+
+* add a <receiver> tag in AndroidManifest.XML
+```
+<receiver android:name=".BootCompletedReceiver">
+        <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        </intent-filter>
+</receiver>
+```
 
 
 

@@ -7,7 +7,7 @@
 
 
 
-### create a dynamic broadcastreceiver
+### Create a dynamic broadcastreceiver
 
 #### 1.how to receive a Connectivity-change
 * create Intentfilter -> addAction(CONNECTIVITY-CHange)
@@ -77,12 +77,39 @@ public class BootCompletedReceiver extends BroadcastReceiver{
 ```
 
 
+
 ## self-defined broadcast
 
 ### Normal broadcasts 标准广播
 
-* First, create a receiver
+* First, create a receiver class
+there must be a receiver to receive your self-defined broadcasts.
 
-
+* crate a <receiver> tag for new receiver
+```
+<receiver android:name=".MyBroadCastReceiver">
+            <intent-filter>
+                <action android:name="com.example.benny.broadcasttest.MY_CAST"/>
+            </intent-filter>
+</receiver>
+```
+* create a intent to send broadcast
+```
+Intent intent = new Intent("com.example.benny.broadcasttest.MY_CAST");
+sendBroadcast(intent);
+```
 
 ### Ordered broadcasts 有序广播
+
+#### Only change a function of normal broadcast
+
+```
+sendBroadcast(intent) -> ndOrderedBroadcast(intent,null)
+
+```
+
+#### add  android:priority=100  to intent-filter of the <receiver> tag to define which receiver can receive the broadcast first.
+
+#### another function is abortBroadcast() which can make a receiver abort a broadcast after receiving it.
+
+

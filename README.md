@@ -14,7 +14,7 @@
 * create Networkchange class extends BroadReceiver 
 * registerReceiver
 * call unregisterReceiver in onDestory()
-
+***
 
 #### 2.connectivity－change with connection state
 * modify codes in onReceive();
@@ -50,7 +50,7 @@ public void onReceive(Context context, Intent intent) {
 ```
 
 
-
+***
 ### create a static broadcastreceiver
 
 why call it static: it can receive a broadcast when the app don't run
@@ -75,8 +75,7 @@ public class BootCompletedReceiver extends BroadcastReceiver{
         </intent-filter>
 </receiver>
 ```
-
-
+***
 
 ## self-defined broadcast
 
@@ -120,5 +119,12 @@ to intent-filter of the <receiver> tag to define which receiver can receive the 
 abortBroadcast() 
 ```
 which can make a receiver abort a broadcast after receiving it.
+
+
+***
+
+## Locol BroadCast 本地广播
+
+* 考虑到全局广播的安全性问题
 
 

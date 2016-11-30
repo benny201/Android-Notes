@@ -108,8 +108,17 @@ sendBroadcast(intent) -> ndOrderedBroadcast(intent,null)
 
 ```
 
-#### add  android:priority=100  to intent-filter of the <receiver> tag to define which receiver can receive the broadcast first.
+* add  
+```
+android:priority=100  
+```
+to intent-filter of the <receiver> tag to define which receiver can receive the broadcast first.
 
-#### another function is abortBroadcast() which can make a receiver abort a broadcast after receiving it.
+
+* another function is 
+```
+abortBroadcast() 
+```
+which can make a receiver abort a broadcast after receiving it.
 
 

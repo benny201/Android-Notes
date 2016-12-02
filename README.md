@@ -172,4 +172,4 @@ class LocalReceiver extends BroadcastReceiver {
 ```
 
 ### There is a broadcast test project for OffLine function in AndroidTestProjects repository.
-[BroadCastForOffLine](http://www.baidu.com "BroadCastForOffLine")
+> [BroadCastForOffLine](http://www.baidu.com "BroadCastForOffLine")

@@ -173,3 +173,7 @@ class LocalReceiver extends BroadcastReceiver {
 
 ### There is a broadcast test project for OffLine function in AndroidTestProjects repository.
 > [BroadCastForOffLine](http://www.baidu.com "BroadCastForOffLine")
+> bugs：
+* android.app.AlertDialog 和 android.support.v7.app.AlertDialog 包的区别。
+* > [Solution 1: 加入APPCompt主题](https://www.v2ex.com/t/292061) 
+* > [Solution 2: replace android.support.v7.app.AlertDialog to android.app.AlertDialog]

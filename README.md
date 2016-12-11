@@ -2,7 +2,7 @@
 
 > 第一行代码的笔记
 
-## Broadcastreceiver
+## 1.0 Broadcastreceiver
 > update:2016/11/24
 
 
@@ -176,4 +176,75 @@ class LocalReceiver extends BroadcastReceiver {
 > bugs：
 * android.app.AlertDialog 和 android.support.v7.app.AlertDialog 包的区别。
 * > [Solution 1: 加入APPCompt主题](https://www.v2ex.com/t/292061) 
-* > [Solution 2: replace android.support.v7.app.AlertDialog to android.app.AlertDialog]
+* > [Solution 2: replace android.support.v7.app.AlertDialog to android.app.AlertDialog]     
+
+
+## 2.0 Data Storage IN Android 
+     
+* File-Storage 文件存储
+* SharedPreference-Storage 
+* Database 数据库存储     
+     
+### 2.1 File-Storage
+
+* `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND     
+
+     
+#### 2.1.1 how to save data: 
+
+```
+public void save(String input) {
+        FileOutputStream out  = null;
+        BufferedWriter writer = null;
+        try {
+            out = openFileOutput("new", Context.MODE_PRIVATE);
+            writer = new BufferedWriter(new OutputStreamWriter(out));
+            writer.write(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(writer!=null) {
+                    writer.close();
+                }
+             } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+```     
+
+
+#### 2.1.2 how to load data?
+
+```
+ public String load() {
+        FileInputStream in = null;
+        BufferedReader bufferedReader = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            in = openFileInput("new");
+            bufferedReader = new BufferedReader(new InputStreamReader(in));
+            String hasread = "";
+            while((hasread = bufferedReader.readLine())!= null) {
+                stringBuilder.append(hasread);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(bufferedReader!=null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return stringBuilder.toString();
+    }
+```     
+     
+> Android test: 
+
+* example source code : [FileStorageTest](http://www.baidu.com "FileStorageTest")     

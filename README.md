@@ -172,7 +172,7 @@ class LocalReceiver extends BroadcastReceiver {
 ```
 
 ### There is a broadcast test project for OffLine function in AndroidTestProjects repository.
-> [BroadCastForOffLine](http://www.baidu.com "BroadCastForOffLine")
+> [BroadCastForOffLine](https://github.com/benny201/AndroidTestProjects/tree/master/BroadCastForOffLine "BroadCastForOffLine")
 > bugs：
 * android.app.AlertDialog 和 android.support.v7.app.AlertDialog 包的区别。
 * > [Solution 1: 加入APPCompt主题](https://www.v2ex.com/t/292061) 
@@ -187,8 +187,8 @@ class LocalReceiver extends BroadcastReceiver {
      
 ### 2.1 File-Storage
 
-* `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND     
-
+* `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND    
+* `openFileInput( )`: ~          
      
 #### 2.1.1 how to save data: 
 
@@ -247,4 +247,5 @@ public void save(String input) {
      
 > Android test: 
 
-* example source code : [FileStorageTest](http://www.baidu.com "FileStorageTest")     
+* example source code : [FileStorageTest](https://github.com/benny201/AndroidTestProjects/tree/master/FileStorageTest "FileStorageTest")     
+

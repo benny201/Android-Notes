@@ -65,7 +65,7 @@ public class BootCompletedReceiver extends BroadcastReceiver{
     }
 }
 ```
-   **不要在oncreate中处理太多逻辑！！！不然会导致崩溃**
+   **不要在onReceive中处理太多逻辑！！！不然会导致崩溃**
 
 * add a <receiver> tag in AndroidManifest.XML
 ```

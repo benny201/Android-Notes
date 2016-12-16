@@ -249,3 +249,31 @@ public void save(String input) {
 
 * example source code : [FileStorageTest](https://github.com/benny201/AndroidTestProjects/tree/master/FileStorageTest "FileStorageTest")     
 
+### 2.2 SharedPreferences()     
+
+#### Key 
+* Storage data in `key-value` method.     
+     
+
+#### Steps     
+     
+##### get a SharedPreferences object     
+     
+###### getSharedOreferences()     
+* mehtod in Context class. Context.getSharedOreferences();     
+* two parameter: getSharedOreferences(filename,mode)
+* two mode : MODE_PRIVATE / MODE_MULTI_PROCESS(deprecated after Android 6.0)     
+     
+###### getPreferences()
+* just one parameter: MODE
+
+###### PreferenceManager Class     
+* getDefaultSharedPreference()     
+     
+##### Use edit() to get a SharedPreferences.Editor Object      
+```
+SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+```     
+
+##### Call putString()/putBoolean()/putInt().etc to 
+

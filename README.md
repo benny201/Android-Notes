@@ -257,17 +257,18 @@ public void save(String input) {
 
 #### Steps     
      
-##### get a SharedPreferences object     
-     
-###### getSharedOreferences()     
+##### get a SharedPreferences object      
+
+`three methods: `
+###### 1.getSharedOreferences()     
 * mehtod in Context class. Context.getSharedOreferences();     
 * two parameter: getSharedOreferences(filename,mode)
 * two mode : MODE_PRIVATE / MODE_MULTI_PROCESS(deprecated after Android 6.0)     
      
-###### getPreferences()
+###### 2.getPreferences()
 * just one parameter: MODE
 
-###### PreferenceManager Class     
+###### 3.PreferenceManager Class     
 * getDefaultSharedPreference()     
      
 ##### Use edit() to get a SharedPreferences.Editor Object      

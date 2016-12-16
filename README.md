@@ -255,9 +255,9 @@ public void save(String input) {
 * Storage data in `key-value` method.     
      
 
-#### Steps     
+#### Three Steps:     
      
-##### get a SharedPreferences object      
+##### Step 1: get a SharedPreferences object      
 
 `three methods: `
 ###### 1.getSharedOreferences()     
@@ -271,10 +271,12 @@ public void save(String input) {
 ###### 3.PreferenceManager Class     
 * getDefaultSharedPreference()     
      
-##### Use edit() to get a SharedPreferences.Editor Object      
+##### Step 2: Use edit() to get a SharedPreferences.Editor Object      
 ```
 SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 ```     
 
-##### Call putString()/putBoolean()/putInt().etc to 
+##### Step 3: Call putString()/putBoolean()/putInt().etc to add data     
+     
+##### Step 4: Call editor.apply() to commit data;
 

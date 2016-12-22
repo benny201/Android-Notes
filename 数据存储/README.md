@@ -109,4 +109,4 @@ SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 ### 2.3 多用于偏好设置功能,大型数据不适用     
 
 ### 2.4 记录密码实战. [sharedPreference Project](https://github.com/benny201/AndroidTestProjects/tree/master/BroadCastForOffLine "sharedPreference Project")       
-* 引入了checkbox，‘注意’ ： 在检查完checkbox的状态后，要继续调用setChecked()将checkbox设置成原来状态       
+* 引入了checkbox，**注意** ： 在检查完checkbox的状态后，要继续调用setChecked()将checkbox设置成原来状态       

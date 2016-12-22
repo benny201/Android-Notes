@@ -4,12 +4,12 @@
 * SharedPreference-Storage 
 * Database 数据库存储     
      
-## File-Storage
+## 1 File-Storage
 
 * `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND    
 * `openFileInput( )`: ~          
      
-### how to save data: 
+### 1.1 how to save data: 
 
 ```
 public void save(String input) {
@@ -34,7 +34,7 @@ public void save(String input) {
 ```     
 
 
-### how to load data?
+### 1.2 how to load data?
 
 ```
  public String load() {
@@ -68,12 +68,12 @@ public void save(String input) {
 
 * example source code : [FileStorageTest](https://github.com/benny201/AndroidTestProjects/tree/master/FileStorageTest "FileStorageTest")     
 
-## SharedPreferences()     
+## 2. SharedPreferences()     
 
 ### Key 
 * Storage data in `key-value` method.     
      
-### Save DATA:
+### 2.1 Save DATA:
 
 #### Three Steps:      
      
@@ -100,9 +100,10 @@ SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
      
 #### Step 4: Call editor.apply() to commit data;      
         
-                  ``    
-### Load data in SharedPreference         
+                      
+### 2.2 Load data in SharedPreference         
 
 * **get a sharedPreference Objec** by calling **getSharedPreferences**        
-* call getString / getInt / get... etc to get data       
-
+* call getString / getInt / get... etc to get data        
+      
+### 多用于偏好设置功能      

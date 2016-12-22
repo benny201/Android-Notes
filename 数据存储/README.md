@@ -1,15 +1,15 @@
-# 2.0 Data Storage IN Android 
+# Data Storage IN Android 
      
 * File-Storage 文件存储
 * SharedPreference-Storage 
 * Database 数据库存储     
      
-## 2.1 File-Storage
+## File-Storage
 
 * `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND    
 * `openFileInput( )`: ~          
      
-### 2.1.1 how to save data: 
+### how to save data: 
 
 ```
 public void save(String input) {
@@ -34,7 +34,7 @@ public void save(String input) {
 ```     
 
 
-### 2.1.2 how to load data?
+### how to load data?
 
 ```
  public String load() {
@@ -68,13 +68,14 @@ public void save(String input) {
 
 * example source code : [FileStorageTest](https://github.com/benny201/AndroidTestProjects/tree/master/FileStorageTest "FileStorageTest")     
 
-## 2.2 SharedPreferences()     
+## SharedPreferences()     
 
-### 2.2.1 Key 
+### Key 
 * Storage data in `key-value` method.     
      
-### 2.2.2 Save DATA:
-### Three Steps:      
+### Save DATA:
+
+#### Three Steps:      
      
 #### Step 1: get a SharedPreferences object      
 
@@ -99,8 +100,8 @@ SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
      
 #### Step 4: Call editor.apply() to commit data;      
         
-        
-### 2.2.3 Load data in SharedPreference         
+                  ``    
+### Load data in SharedPreference         
 
 * **get a sharedPreference Objec** by calling **getSharedPreferences**        
 * call getString / getInt / get... etc to get data       

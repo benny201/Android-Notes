@@ -281,8 +281,8 @@ SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 ##### Step 4: Call editor.apply() to commit data;      
         
         
-#### 2.2.3 Load data in SharedPreference     
+#### 2.2.3 Load data in SharedPreference         
 
-##### **get a sharedPreference Objec** by calling **getSharedPreferences**    
-##### call getString / getInt / get... etc to get data
+* **get a sharedPreference Objec** by calling **getSharedPreferences**        
+* call getString / getInt / get... etc to get data       
 

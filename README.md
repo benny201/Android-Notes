@@ -75,8 +75,8 @@ public class BootCompletedReceiver extends BroadcastReceiver{
         </intent-filter>
 </receiver>
 ```
-***
-
+***     
+        
 ## self-defined broadcast
 
 ### Normal broadcasts 标准广播
@@ -251,11 +251,11 @@ public void save(String input) {
 
 ### 2.2 SharedPreferences()     
 
-#### Key 
+#### 2.2.1 Key 
 * Storage data in `key-value` method.     
      
-
-#### Three Steps:     
+#### 2.2.2 Save DATA:
+#### Three Steps:      
      
 ##### Step 1: get a SharedPreferences object      
 
@@ -278,5 +278,11 @@ SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 
 ##### Step 3: Call putString()/putBoolean()/putInt().etc to add data     
      
-##### Step 4: Call editor.apply() to commit data;
+##### Step 4: Call editor.apply() to commit data;      
+        
+        
+#### 2.2.3 Load data in SharedPreference     
+
+##### **get a sharedPreference Objec** by calling **getSharedPreferences**    
+##### call getString / getInt / get... etc to get data
 

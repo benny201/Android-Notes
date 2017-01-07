@@ -4,7 +4,7 @@
 * SharedPreference-Storage 
 * Database 数据库存储     
      
-## 1 File-Storage
+## 1.File-Storage
 
 * `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND    
 * `openFileInput( )`: ~          

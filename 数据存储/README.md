@@ -11,7 +11,7 @@
      
 ### 1.1 how to save data: 
 
-```
+```java
 public void save(String input) {
         FileOutputStream out  = null;
         BufferedWriter writer = null;
@@ -36,7 +36,7 @@ public void save(String input) {
 
 ### 1.2 how to load data?
 
-```
+```java
  public String load() {
         FileInputStream in = null;
         BufferedReader bufferedReader = null;
@@ -92,7 +92,7 @@ public void save(String input) {
 * getDefaultSharedPreference()     
      
 #### Step 2: Use edit() to get a SharedPreferences.Editor Object      
-```
+```java
 SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 ```     
 
@@ -121,7 +121,7 @@ SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 ### 3.1 Create a Database
 * Create a MyDataBaseHelper extends SQLiteOpenHelper
 * create a contructor 
-```Android
+```java
 public MyDataBaseHelper(Context mContext, String name, SQLiteDatabase.CursorFactory cursor, int version) {
         super(mContext, name, cursor, version);
         context = mContext;
@@ -129,7 +129,7 @@ public MyDataBaseHelper(Context mContext, String name, SQLiteDatabase.CursorFact
 ```
 * execute a SQL statement in OnCreate(SQLiteDatabase db) by db.execSQL(SQL statement)
 
-```Android
+```java
 //SQL statement
     private static final String Create_book = "Create table Book("
                                                 + "id integer primary key autoincrement,"
@@ -145,7 +145,7 @@ public MyDataBaseHelper(Context mContext, String name, SQLiteDatabase.CursorFact
 ```
 * create database in mainactivity, create a database by getWritableDatabase() / getReadableDatabase()
 
-```Android
+```java
 myDataBaseHelper.getWritableDatabase();
 ```
        
@@ -155,7 +155,7 @@ myDataBaseHelper.getWritableDatabase();
 ### 3.2 Create data
 * 创建contentvalues对象进行组装数据
 
-```Android
+```java
 ContentValues contentValues = new ContentValues();
 // first table
 contentValues.put("author", "Benny's Success");
@@ -164,34 +164,34 @@ contentValues.put("name", "Benny");
 ```
 
 * add data by SQLiteDatabase.insert()
-```Android
+```java
 SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
 db.insert("Book", null, contentValues);
 ```
      
 * clear contentValues after adding data
 
-```Android
+```java
 contentValues.clear();
 ```
      
 ### 3.3 Update data
 * modify the version of database in 
 
-```Android
+```java
 myDataBaseHelper = new MyDataBaseHelper(this, "Book.db", null, 2);
 ```
      
 * 创建contentvalues对象进行组装数据
 
-```Android
+```java
 ContentValues contentValues = new ContentValues();
 contentValues.put("pages", 77);
 ```
      
 * call SQLiteDatabase.update()
 
-```Android
+```java
 SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
 db.update("Book", contentValues, "name = ?", new String[] {"HelloWord"});
 ```
@@ -199,7 +199,7 @@ db.update("Book", contentValues, "name = ?", new String[] {"HelloWord"});
 ### 3.4 Delete data
 * call SQLiteDatabase.delete()
 
-```Android
+```java
 SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
 db.delete("Book", "pages > ?", new String[]{"500"});
 ```
@@ -208,12 +208,12 @@ db.delete("Book", "pages > ?", new String[]{"500"});
 * call SQLiteDatabase.query();
 * 7 prarmeters in query();
 * create a cursor reference to store the query() result 
-```Android
+```java
 SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
 Cursor cursor = db.query("Book", null, null, null, null, null, null); 
 ```
 * traversal the cursor above;
-```Android
+```java
 if (cursor.moveToFirst()) {
     do {
         String name = cursor.getString(cursor.getColumnIndex("name"));
@@ -224,12 +224,15 @@ if (cursor.moveToFirst()) {
     } while(cursor.moveToNext());
 }
 ```
-### 实战Project     
+### 3.6 实战Project     
 * [DataBaseTest](https://github.com/benny201/AndroidTestProjects/tree/master/DataBaseTest "DataBaseTest")
 
 
-## 4. LitePal
+## 4.LitePal
 * [LitePal for Android](https://github.com/LitePalFramework/LitePal "LitePal for Android")
 * a powerful tool for database in Android
 * Using object-relational mapping (ORM) pattern : equip the SQL with object-oriented character
 * easy to use
+
+### 4.1 实战Project    
+* [LitePalTest](https://github.com/benny201/AndroidTestProjects/tree/master/LitePalTest "LitePalTest")

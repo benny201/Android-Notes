@@ -1,196 +1,15 @@
-# Android-Notes
-
-> 第一行代码的笔记
-
-## 1.0 Broadcastreceiver
-> update:2016/11/24
-
-
-
-### Create a dynamic broadcastreceiver
-
-#### 1.how to receive a Connectivity-change
-* create Intentfilter -> addAction(CONNECTIVITY-CHange)
-* create Networkchange class extends BroadReceiver 
-* registerReceiver
-* call unregisterReceiver in onDestory()
-***
-
-#### 2.connectivity－change with connection state
-* modify codes in onReceive();
-* create ConnectivityManager and call **Context.getSystemService()** to get service state
-```
-public void onReceive(Context context, Intent intent) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if(networkInfo!=null&&networkInfo.isAvailable()) {
-            Toast.makeText(context,"available",Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context,"unavailable",Toast.LENGTH_LONG).show();
-        }
-        
-    }
-```
-* differences between uses-permission and permission :
-``` 
-两者之间的不同之一就是，作用域不同：
-在manifest.xml文件中，<uses-permission>是和<application>同级的节点，一般<uses-permission >是在</application>后面的。
-但<permission>就不同了，是定义在<application>和</application>之间，和Activity、Service同级别的。
-其二：
-<uses-permission>是官方定义的权限，是调用别人的东西的时候自己需要声明的权限。
-<permission>是自己定义的权限，就是别人调用这个程序时需要用<uses-permission>来声明。
-在一般情况下实际上不需要为自己的应用程序声明某个权限，除非你提供了供其他应用程序调用的代码或者数据。
-这个时候你才需要使用<permission>这个标签，很显然这个标签可以让我们声明自己程序的权限
-``` 
-** add uses-permission **
-``` 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-```
-
-
-***
-### create a static broadcastreceiver
-
-why call it static: it can receive a broadcast when the app don't run
-* create a new class for broadcast 
-e.g.
-
-```
-public class BootCompletedReceiver extends BroadcastReceiver{
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,"bootcompleted",Toast.LENGTH_LONG).show();
-    }
-}
-```
-   **不要在onReceive中处理太多逻辑！！！不然会导致崩溃**
-
-* add a <receiver> tag in AndroidManifest.XML
-```
-<receiver android:name=".BootCompletedReceiver">
-        <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-        </intent-filter>
-</receiver>
-```
-***     
-        
-## self-defined broadcast
-
-### Normal broadcasts 标准广播
-
-* First, create a receiver class
-there must be a receiver to receive your self-defined broadcasts.
-
-* crate a <receiver> tag for new receiver
-```
-<receiver android:name=".MyBroadCastReceiver">
-            <intent-filter>
-                <action android:name="com.example.benny.broadcasttest.MY_CAST"/>
-            </intent-filter>
-</receiver>
-```
-* create a intent to send broadcast
-```
-Intent intent = new Intent("com.example.benny.broadcasttest.MY_CAST");
-sendBroadcast(intent);
-```
-
-### Ordered broadcasts 有序广播
-
-#### Only change a function of normal broadcast
-
-```
-sendBroadcast(intent) -> ndOrderedBroadcast(intent,null)
-
-```
-
-* add  
-```
-android:priority=100  
-```
-to intent-filter of the <receiver> tag to define which receiver can receive the broadcast first.
-
-
-* another function is 
-```
-abortBroadcast() 
-```
-which can make a receiver abort a broadcast after receiving it.
-
-
-***
-
-## Locol BroadCast 本地广播
-
-* 考虑到全局广播的安全性问题
-* create a LocalReceiver
-* create a LocalBroadcastManager and get an instance
-* create a intentfilter
-* call <localBroadcastManager.registerReceiver> to register the receiver
-* unregister in Ondestory()
-
-Code as fllow:
-```
- @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button = (Button) findViewById(R.id.button);
-        localBroadcastManager  = LocalBroadcastManager.getInstance(this);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.example.benny.broadcastforordered.LOCAL_BROADCAST");
-                localBroadcastManager.sendBroadcast(intent);
-            }
-        });
-
-        intentFilter = new IntentFilter();
-        intentFilter.addAction("com.example.benny.broadcastforordered.LOCAL_BROADCAST");
-        localReceiver = new LocalReceiver();
-        localBroadcastManager.registerReceiver(localReceiver,intentFilter);
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        localBroadcastManager.unregisterReceiver(localReceiver);
-    }
-}
-
-class LocalReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,"LOCAL_RECEIVED!",Toast.LENGTH_LONG).show();
-    }
-}
-```
-
-### There is a broadcast test project for OffLine function in AndroidTestProjects repository.
-> [BroadCastForOffLine](https://github.com/benny201/AndroidTestProjects/tree/master/BroadCastForOffLine "BroadCastForOffLine")
-> bugs：
-* android.app.AlertDialog 和 android.support.v7.app.AlertDialog 包的区别。
-* > [Solution 1: 加入APPCompt主题](https://www.v2ex.com/t/292061) 
-* > [Solution 2: replace android.support.v7.app.AlertDialog to android.app.AlertDialog]     
-
-
-## 2.0 Data Storage IN Android 
+# Data Storage IN Android 
      
 * File-Storage 文件存储
 * SharedPreference-Storage 
 * Database 数据库存储     
      
-### 2.1 File-Storage
+## 1.File-Storage
 
 * `openFIleOutput()`： 第一个参数为文件名，第二个是操作模式：MODE_PRIVATE(default) & MODE_APPEND    
 * `openFileInput( )`: ~          
      
-#### 2.1.1 how to save data: 
+### 1.1 how to save data: 
 
 ```
 public void save(String input) {
@@ -215,7 +34,7 @@ public void save(String input) {
 ```     
 
 
-#### 2.1.2 how to load data?
+### 1.2 how to load data?
 
 ```
  public String load() {
@@ -249,40 +68,164 @@ public void save(String input) {
 
 * example source code : [FileStorageTest](https://github.com/benny201/AndroidTestProjects/tree/master/FileStorageTest "FileStorageTest")     
 
-### 2.2 SharedPreferences()     
+## 2. SharedPreferences()     
 
-#### 2.2.1 Key 
+### Key 
 * Storage data in `key-value` method.     
      
-#### 2.2.2 Save DATA:
+### 2.1 Save DATA:
+
 #### Three Steps:      
      
-##### Step 1: get a SharedPreferences object      
+#### Step 1: get a SharedPreferences object      
 
 `three methods: `
-###### 1.getSharedOreferences()     
+##### 1.getSharedOreferences()     
 * mehtod in Context class. Context.getSharedOreferences();     
 * two parameter: getSharedOreferences(filename,mode)
 * two mode : MODE_PRIVATE / MODE_MULTI_PROCESS(deprecated after Android 6.0)     
      
-###### 2.getPreferences()
+##### 2.getPreferences()
 * just one parameter: MODE
 
-###### 3.PreferenceManager Class     
+##### 3.PreferenceManager Class     
 * getDefaultSharedPreference()     
      
-##### Step 2: Use edit() to get a SharedPreferences.Editor Object      
+#### Step 2: Use edit() to get a SharedPreferences.Editor Object      
 ```
 SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 ```     
 
-##### Step 3: Call putString()/putBoolean()/putInt().etc to add data     
+#### Step 3: Call putString()/putBoolean()/putInt().etc to add data     
      
-##### Step 4: Call editor.apply() to commit data;      
+#### Step 4: Call editor.apply() to commit data;      
         
-        
-#### 2.2.3 Load data in SharedPreference         
+                      
+### 2.2 Load data in SharedPreference         
 
 * **get a sharedPreference Objec** by calling **getSharedPreferences**        
-* call getString / getInt / get... etc to get data       
+* call getString / getInt / get... etc to get data        
+      
+### 2.3 多用于偏好设置功能,大型数据不适用     
 
+### 2.4 记录密码实战. [sharedPreference Project](https://github.com/benny201/AndroidTestProjects/tree/master/BroadCastForOffLine "sharedPreference Project")       
+* 引入了checkbox，**注意** ： 在检查完checkbox的状态后，要继续调用setChecked()将checkbox设置成原来状态       
+
+## 3.SQLiteDatabase
+
+* Android中集成的database
+* 可以用SQL语句实现DataBase操作
+* 四个关键操作：Create / Retrieve / Update / Delete -> CRUD
+
+### 3.1 Create a Database
+* Create a MyDataBaseHelper extends SQLiteOpenHelper
+* create a contructor 
+```Android
+public MyDataBaseHelper(Context mContext, String name, SQLiteDatabase.CursorFactory cursor, int version) {
+        super(mContext, name, cursor, version);
+        context = mContext;
+    }
+```
+* execute a SQL statement in OnCreate(SQLiteDatabase db) by db.execSQL(SQL statement)
+
+```Android
+//SQL statement
+    private static final String Create_book = "Create table Book("
+                                                + "id integer primary key autoincrement,"
+                                                + "author text,"
+                                                + "pages integer,"
+                                                + "name text)";
+
+@Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(Create_book);
+        Toast.makeText(context,"success!",Toast.LENGTH_SHORT).show();
+    }
+```
+* create database in mainactivity, create a database by getWritableDatabase() / getReadableDatabase()
+
+```Android
+myDataBaseHelper.getWritableDatabase();
+```
+       
+* view database by adb shell in terminal
+
+
+### 3.2 Create data
+* 创建contentvalues对象进行组装数据
+
+```Android
+ContentValues contentValues = new ContentValues();
+// first table
+contentValues.put("author", "Benny's Success");
+contentValues.put("pages", 888);
+contentValues.put("name", "Benny");
+```
+
+* add data by SQLiteDatabase.insert()
+```Android
+SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
+db.insert("Book", null, contentValues);
+```
+     
+* clear contentValues after adding data
+
+```Android
+contentValues.clear();
+```
+     
+### 3.3 Update data
+* modify the version of database in 
+
+```Android
+myDataBaseHelper = new MyDataBaseHelper(this, "Book.db", null, 2);
+```
+     
+* 创建contentvalues对象进行组装数据
+
+```Android
+ContentValues contentValues = new ContentValues();
+contentValues.put("pages", 77);
+```
+     
+* call SQLiteDatabase.update()
+
+```Android
+SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
+db.update("Book", contentValues, "name = ?", new String[] {"HelloWord"});
+```
+
+### 3.4 Delete data
+* call SQLiteDatabase.delete()
+
+```Android
+SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
+db.delete("Book", "pages > ?", new String[]{"500"});
+```
+
+### 3.5 Retrieve 
+* call SQLiteDatabase.query();
+* 7 prarmeters in query();
+* create a cursor reference to store the query() result 
+```Android
+SQLiteDatabase db = myDataBaseHelper.getWritableDatabase();
+Cursor cursor = db.query("Book", null, null, null, null, null, null); 
+```
+* traversal the cursor above;
+```Android
+if (cursor.moveToFirst()) {
+    do {
+        String name = cursor.getString(cursor.getColumnIndex("name"));
+        String author = cursor.getString(cursor.getColumnIndex("author"));
+        int pages = cursor.getInt(cursor.getColumnIndex("pages"));
+
+        Log.d(TAG, name + author + pages);
+    } while(cursor.moveToNext());
+}
+```
+
+## 4. LitePal
+* [LitePal for Android](https://github.com/LitePalFramework/LitePal "LitePal for Android")
+* a powerful tool for database in Android
+* Using object-relational mapping (ORM) pattern : equip the SQL with object-oriented character
+* easy to use

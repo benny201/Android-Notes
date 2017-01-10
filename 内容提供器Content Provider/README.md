@@ -249,6 +249,12 @@ long newBookId = db.insert("Book", null, values);
     }
 ```
 
+### 3.8 Content provider project
+* []()
+
+### 3.9 A example to use content provider
+* []()
+
 
 
 

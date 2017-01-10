@@ -17,4 +17,4 @@
 * the system just tells the user what permission groups the app needs, not the individual permissions.     
      
 ## 运行时权限实战
-* []()
+* [RuntimePermissionTest](https://github.com/benny201/AndroidTestProjects/tree/master/RuntimePermissionTest)

@@ -68,7 +68,7 @@ getContentResolver().delete(uri, values, "column1 = ? and column2 = ?", new Stri
 
 ### 2.5 Project实战
 * 读取联系人信息
-* []()
+* [ContentProviderforContactsTest](https://github.com/benny201/AndroidTestProjects/tree/master/ContentProviderforContactsTest "ContentProviderforContactsTest")
 
 ## 3. 自定义内容提供器
 
@@ -250,10 +250,10 @@ long newBookId = db.insert("Book", null, values);
 ```
 
 ### 3.8 Content provider project
-* []()
+* [DataBaseTest](https://github.com/benny201/AndroidTestProjects/tree/master/DataBaseTest "DataBaseTest")
 
 ### 3.9 A example to use content provider
-* []()
+* [ProviderTest](https://github.com/benny201/AndroidTestProjects/tree/master/ProviderTest "ProviderTest")
 
 
 
